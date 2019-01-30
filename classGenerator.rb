@@ -6,7 +6,7 @@
 #    By: lhernand <lhernand@student.42.us.or>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/28 21:42:03 by lhernand          #+#    #+#              #
-#    Updated: 2019/01/28 21:42:04 by lhernand         ###   ########.fr        #
+#    Updated: 2019/01/30 01:00:40 by lhernand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,11 +89,11 @@ def make_makefile_c
 		f.puts
 		f.puts "clean:"
 		f.puts "		@$(LIBC)"
-		f.puts "		@$/bin/rm -f $(OBJECTS)"
+		f.puts "		@/bin/rm -f $(OBJECTS)"
 		f.puts
 		f.puts "fclean:"
 		f.puts "		@$(LIBF)"
-		f.puts "		@$(/bin/rm -f $(OBJECTS) $(NAME)"
+		f.puts "		@/bin/rm -f $(OBJECTS) $(NAME)"
 		f.puts
 		f.puts "re: fclean all"
 		f.puts
@@ -119,10 +119,10 @@ def make_makefile_cpp
 		f.puts "		@$(CXX) $(CXXLAGS) $(CXXFILES) -o $(NAME) "
 		f.puts
 		f.puts "clean:"
-		f.puts "		@$/bin/rm -f $(CXXOBJECTS)"
+		f.puts "		@/bin/rm -f $(CXXOBJECTS)"
 		f.puts
 		f.puts "fclean:"
-		f.puts "		@$/bin/rm -f $(CXXOBJECTS) $(NAME)"
+		f.puts "		@/bin/rm -f $(CXXOBJECTS) $(NAME)"
 		f.puts
 		f.puts "re: fclean all"
 		f.puts
@@ -133,8 +133,7 @@ end
 
 def make_cpp_source(file)
 	file_name = "#{file}.cpp"
-	header_name = "#{file.capitalize}.hpp"
-	file.capitalize!
+	header_name = "#{file}.hpp"
 	File.open("#{file_name}", 'w') do |f|
 		f.puts "# include \"#{header_name}\""
 		f.puts
@@ -148,7 +147,7 @@ def make_cpp_source(file)
 		f.puts "}"
 		f.puts "#{file}::#{file}(#{file} const & src)"
 		f.puts "{"
-		f.puts "	*this = src ;"
+		f.puts "	*this = src;"
 		f.puts "}"
 		f.puts "#{file}		&#{file}::operator=(#{file} const & rhs)"
 		f.puts "{"
@@ -163,7 +162,6 @@ end
 def make_cpp_header(file)
 	header_file = "#{file}.hpp"
 	define_header_name = "#{file.upcase}_HPP"
-	file.capitalize!
 	File.open("#{header_file}", 'w') do |f|
 		f.puts "#ifndef #{define_header_name}"
 		f.puts "# define #{define_header_name}"
